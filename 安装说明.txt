@@ -1,0 +1,49 @@
+local-decay-rag 0.3.1 —— dsh-go 手机插件
+=====================================
+
+这是什么
+--------
+给 dsh-go 手机 App 用的本地语料检索插件：输入框上方点「查语料」，
+检索你本机的 md 笔记，按「相似度 × 时间衰减」排序。
+
+纯 JS，不需要 Python / numpy / 嵌入模型，不联网。
+手机上实测：83 个文件约 20 万字，建索引 507 ms，单次检索 4.5 ms，内存 43 MB。
+
+安装（在装了 dsh-go 的那台 Android 手机上）
+------------------------------------------
+1. 把整个 local-decay-rag 文件夹拷到手机里，例如：
+     /sdcard/Download/local-decay-rag
+
+2. 在 App 的终端（或本机 Ubuntu 环境）里：
+
+     P="${DSH_HOME:-$HOME/.dsh}/dsh-go/plugins/local-decay-rag"
+     mkdir -p "$(dirname "$P")"
+     cp -r /sdcard/Download/local-decay-rag "$P"
+     dsh plugin --profile web add "$P"
+
+3. 打开 $DSH_HOME/profiles/web/package.json，在 dsh.profile.bundles 数组里加一行：
+
+     "local-decay-rag",
+
+4. App → 引擎 → 重启引擎。
+
+5. 输入框上方会出现「查语料」胶囊；对话详情页「插件」页签里能打开「检索结果」面板。
+
+配置
+----
+在同一目录放一个 config.json（可参考 config.example.json）：
+
+  corpus     语料根目录，默认 /sdcard/notes
+  halfLife   衰减半衰期（天），默认 30
+  topK       返回条数，默认 6
+  mode       gate（乘性门，默认）/ additive（旧版加性 0.75+0.25）
+  gate       乘性门下限，默认 0.85
+  refreshMs  多久检查一次语料变化，默认 20000；0 = 关闭
+  skip       额外不进索引的目录名
+
+卸载
+----
+  dsh plugin --profile web remove local-decay-rag
+  再从 bundles 里删掉那一行，并删除插件目录。
+
+细节见同目录 README.md 与 CHANGELOG.md。

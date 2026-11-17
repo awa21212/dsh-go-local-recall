@@ -1,0 +1,68 @@
+{
+  "name": "local-decay-rag",
+  "version": "0.3.1",
+  "private": false,
+  "type": "module",
+  "main": "lib/index.js",
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "engines": {
+    "dsh": ">=0.2.1-rc.2 <0.3.0-0"
+  },
+  "dshGo": {
+    "v": 1,
+    "title": {
+      "zh": "语料检索",
+      "en": "Corpus recall"
+    },
+    "icon": "book",
+    "wants": [
+      "draft"
+    ],
+    "contributes": {
+      "composer.actions": [
+        {
+          "id": "search",
+          "label": {
+            "zh": "查语料",
+            "en": "Recall"
+          },
+          "icon": "search"
+        }
+      ],
+      "panels": [
+        {
+          "id": "hits",
+          "title": {
+            "zh": "检索结果",
+            "en": "Recall hits"
+          },
+          "icon": "list",
+          "placement": [
+            "features",
+            "plugin"
+          ]
+        }
+      ]
+    }
+  },
+  "description": "dsh-go 插件：手机本地语料检索，块级时间戳 + 时间衰减。410 行纯 JS，零依赖、不用嵌入模型、不联网。",
+  "keywords": [
+    "dsh-go",
+    "dsh",
+    "plugin",
+    "rag",
+    "retrieval",
+    "local-first",
+    "time-decay"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/awa21212/dsh-go-local-recall.git"
+  },
+  "homepage": "https://github.com/awa21212/dsh-go-local-recall"
+}

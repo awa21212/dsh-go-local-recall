@@ -1,0 +1,8 @@
+{
+  "corpus": "/sdcard/notes",
+  "halfLife": 30,
+  "topK": 6,
+  "mode": "gate",
+  "gate": 0.85,
+  "skip": []
+}
